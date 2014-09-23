@@ -80,6 +80,51 @@ class Human_resources_test extends PHPUnit_Framework_TestCase
 		$this->assertEquals('Pablo Martinez',$name);
 
 	}
+
+
+	/*
+	 * 
+	 * name: test_deductSalary
+	 * @param
+	 * @return
+	 * 
+	 * Para este nuevo ejemplo , supongamos que queremos probar 
+	 * una funcion , que basicamente dedusca basados en el salario
+	 * salud y pension , lo que recibira el empleado mes a mes,
+	 * para esto nos ayudaremos de la clase base, Human_resources, que
+	 * ya tiene los metodos de deducir el salario mandadole un parametro.
+	 * en el metodo test lo unico que tenemos que hacer es invocar y probar
+	 * los metodos necesarios utilizando coverage y al final cambiaremos el assert,
+	 * para comparar multiples valores. Para este ejemplo si, el empleado deduce 
+	 * alguno de estos valores 530000,650000,700000
+	 *
+	 * para ejecutar esta prueba unitaria, necesitamos previamente llamar a la clase Human_resources
+	 * el codigo encardago de la llamada a la clase principal esta en index ,en la raiz. 
+	 * Utilizaremos en la consola el metodo bootstrap, que
+	 * lo que hace es basicamente llamar un script antes de la prueba para pre-cargar recursos que necesitemos.
+	 * para este ejemplo seria algo como : 
+	 * 
+	 * >  phpunit --bootstrap index.php tests/Human_resources_test.php
+	 * 
+	 */
+	public function test_deductSalary()
+	{
+		// Se instancia el objeto que sera probado.
+		$this->coverage = new Human_resources();
+
+		// Utilizamos metodos corresponientes a la clase base Human_resources
+		$this->coverage->setSalary(530000);
+		$totalSalary = $this->coverage->employeeDeduct();
+
+		// Cambiamos la funcion Assert por assertContains,
+		/*
+		* name: assertContains
+		* assertContains( var , array(arg ... ));
+		* sirve para comparar un caso esperado con multiples valores.
+		*/ 
+		$this->assertContains($totalSalary, array(530000,650000,700000));
+	}
+
 	
 
 }
