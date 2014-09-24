@@ -14,14 +14,15 @@ class Human_resources
 
 	public function __construct()
 	{
-		$employee->name 	= 'Pablo';
-		$employee->lastName	= 'Martinez';
-		$employee->salary 	= 0;
-		$employee->tel 		= '25500';
-		$employee->city 	= 'Medellin';
+		$employee->name 		= 'Pablo';
+		$employee->lastName		= 'Martinez';
+		$employee->birthDate	= '1991-03-20';
+		$employee->salary 		= 0;	
+		$employee->tel 			= '25500';
+		$employee->city 		= 'Medellin';
 
-		$deductHealth 	= 30000;
-		$deductPension 	= 10000; 
+		$deductHealth 			= 30000;
+		$deductPension 			= 10000; 
 	}
 
 	public function setSalary( $salary )

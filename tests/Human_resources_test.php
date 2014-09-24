@@ -125,6 +125,61 @@ class Human_resources_test extends PHPUnit_Framework_TestCase
 		$this->assertContains($totalSalary, array(530000,650000,700000));
 	}
 
+	/*
+	*
+	* name: getEmployee
+	* @author: pablo martinez
+	*
+	* Con base en el anterior ejemplo, crearemos una funcion mas completa con 
+	* los metodos mostrados anteriormente y enseñaremos otros mas.
+	* 
+	* Supongamos que queremos obtener los atributos del empleado, vamos a validar primero 
+	* el objeto que llega , una serie de resultados esperados con una serie de metodos asserts,
+	* ,un control de metodos de resultados no esperados y control de errores.
+	*
+	*
+	*/
+	public function  test_getEmployee()
+	{
+		// Se instancia el objeto que sera probado.
+		$this->coverage = new Human_resources();
+
+		/* Validamos los atributos de la clase.
+		* assertContainsOnly( type, arg( [arr] );
+		*/
+		$this->assertContainsOnly('string', $this->coverage->name );
+		$this->assertInternalType('date', $this->coverage->birthDate );
+
+		$date = date('d/m/Y' , strtotime($this->coverage->birthDate) ) ;
+
+		/* 
+		* Supongamos que esperamos un salario mayor a 0, si el salario es 0
+		* lo reportaremos como un error.
+		* en caso contrario mostraremos un aviso de confirmacion.
+		*/
+		if( $this->coverage->salary  > 0 )
+		{
+			$this->assertFalse(TRUE, 'valid salary.');
+		}
+		else
+		{
+			$this->assertFalse(TRUE, 'Salary <= 0 , error.');
+		}
+
+		// Validamos si la ciudad se encuentra en alguna de las ciudades representativas de colombia. 
+
+		$this->assertContains( $this->coverage->city, array('Cali','Bogota',
+															'Pereira','soledad',
+															'Medellin','Barranquilla',
+															'Bucaramanga','Manizalez' ) );
+		// Esperamos que el telefono no este en blanco.
+		$this->assertNotNull( $this->coverage->tel );
+
+	}
+
+
+
+
 	
 
 }
